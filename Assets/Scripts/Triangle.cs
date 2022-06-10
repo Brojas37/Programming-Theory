@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE
 public class Triangle : Shape
 {
     // Start is called before the first frame update
@@ -18,9 +19,14 @@ public class Triangle : Shape
     void Update()
     {
         Move(speed);
+        if (gameManager.gameOver)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public void Rotate(int side)
+    // ENCAPSULATION
+    private void Rotate(int side)
     {
         switch (side)
         {
@@ -43,6 +49,7 @@ public class Triangle : Shape
         Clicked();
     }
 
+    // POLYMORPHISM
     public override Vector3 GenerateSpawnPos()
     {
         Vector3 SpawnPos = new Vector3(0.0f, 0.0f, 0.0f);

@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float score;
-    public GameUI gameUI;
-    public GameObject Cube;
-    public GameObject Sphere;
-    public GameObject Triangle;
+    // ENCAPSULATION
+    public float score { get; private set; }
+    public bool gameOver { get; set; }
+    [SerializeField]
+    private GameUI gameUI;
+    [SerializeField]
+    private GameObject Cube;
+    [SerializeField]
+    private GameObject Sphere;
+    [SerializeField]
+    private GameObject Triangle;
 
     private float cubeTimer;
     private float cubeWait;
@@ -20,6 +26,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;
         score = 0;
         gameUI = GameObject.Find("Canvas").GetComponent<GameUI>();
         gameUI.StartGame();
@@ -34,39 +41,43 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckCube();
-        if (cubeWait <= 1)
+        if (!gameOver)
         {
-            CheckSphere();
-            if (sphereWait <= 2)
+            CheckCube();
+            if (cubeWait <= 1)
             {
-                CheckTri();
+                CheckSphere();
+                if (sphereWait <= 2)
+                {
+                    CheckTri();
+                }
             }
         }
     }
 
+    // ABSTRACTION
     public void AddToScore(float points)
     {
         score += points;
         gameUI.UpdateYourScore();
     }
 
-    public void CreateCube()
+    private void CreateCube()
     {
         Instantiate(Cube);
     }
 
-    public void CreateSphere()
+    private void CreateSphere()
     {
         Instantiate(Sphere);
     }
 
-    public void CreateTri()
+    private void CreateTri()
     {
         Instantiate(Triangle, Triangle.transform.position, Triangle.transform.rotation);
     }
 
-    public void CheckCube()
+    private void CheckCube()
     {
         cubeTimer += Time.deltaTime;
         if (cubeTimer > cubeWait)
@@ -80,7 +91,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CheckSphere()
+    private void CheckSphere()
     {
         sphereTimer += Time.deltaTime;
         if (sphereTimer > sphereWait)
@@ -94,7 +105,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CheckTri()
+    private void CheckTri()
     {
         triTimer += Time.deltaTime;
         if (triTimer > triWait)

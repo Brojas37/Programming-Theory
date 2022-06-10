@@ -5,14 +5,34 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public Text HighScore;
-    public Text YourScore;
+    // ENCAPSULATION
+    [SerializeField]
+    private Text HighScore;
+    [SerializeField]
+    private Text YourScore;
+    [SerializeField]
+    private Text TimeLeft;
 
-    public GameManager gameManager;
+    private float timer;
+    private GameManager gameManager;
 
     public void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        timer = 100;
+    }
+
+    public void Update()
+    {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            TimeLeft.text = "Time: " + Mathf.Round(timer);
+        } else
+        {
+            gameManager.gameOver = true;
+            TimeLeft.text = "Time: 0";
+        }
     }
 
     public void StartGame()

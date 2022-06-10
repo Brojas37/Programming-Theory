@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE
 public class Sphere : Shape
 {
-    public float timer = 0.0f;
-    public float curveValue;
-    public float curveSpeed;
+    // ENCAPSULATION
+    private float timer = 0.0f;
+    private float curveValue;
+    private float curveSpeed;
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,10 @@ public class Sphere : Shape
     {
         Move(speed);
         timer += Time.deltaTime * curveSpeed;
+        if (gameManager.gameOver)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void OnMouseDown()
@@ -31,6 +37,7 @@ public class Sphere : Shape
         Clicked();
     }
 
+    // POLYMORPHISM
     public override void Move (float speed)
     {
         switch (direction)

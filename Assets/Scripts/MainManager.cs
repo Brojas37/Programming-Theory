@@ -25,6 +25,7 @@ public class MainManager : MonoBehaviour
         public float score;
     }
 
+    // ABSTRACTION
     public void SaveBestScore(float bestScore)
     {
         SaveData data = new SaveData();

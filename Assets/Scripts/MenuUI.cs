@@ -7,8 +7,11 @@ using System.IO;
 
 public class MenuUI : MonoBehaviour
 {
-    public Text highScore;
-    public float bestScore;
+    // ENCAPSULATION
+    [SerializeField]
+    private Text highScore;
+
+    private float bestScore;
 
     public void Start()
     {
@@ -21,7 +24,7 @@ public class MenuUI : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void LoadHighScore()
+    private void LoadHighScore()
     {
         highScore.text = "High Score: " + bestScore;
     }

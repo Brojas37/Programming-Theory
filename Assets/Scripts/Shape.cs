@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Shape : MonoBehaviour
 {
-    public int direction;
-    public float pointsWorth;
-    public float speed;
-    public GameManager gameManager;
+    // ENCAPSULATION
+    protected int direction;
+    protected float pointsWorth;
+    protected float speed;
+    protected GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class Shape : MonoBehaviour
         
     }
 
+    // ABSTRACTION
     public virtual Vector3 GenerateSpawnPos()
     {
         Vector3 SpawnPos = new Vector3(0.0f, 0.0f, 0.0f);
